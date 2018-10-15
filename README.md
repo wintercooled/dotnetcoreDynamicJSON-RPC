@@ -5,7 +5,7 @@ Similar in concept to [python-bitcoinrpc AuthServiceProxy](https://github.com/jg
 
 Runs on Windows, Linux, Mac using the .Net Core cross-platform application framework.
 
-**Status: Work in progress.** Currently tidying up code comments and adding examples of use for [Bitcoin](https://github.com/bitcoin/bitcoin) and [Elements](https://elementsproject.org/) then i'll see how it works with [c-lightnining](https://github.com/ElementsProject/lightning).
+**Status: Work in progress.** Currently tidying up code comments and adding examples of use for [Bitcoin](https://github.com/bitcoin/bitcoin) and [Elements](https://elementsproject.org/) then i'll see how it works with [c-lightning](https://github.com/ElementsProject/lightning).
 
 ### Overview
 
@@ -19,7 +19,7 @@ The dotnetcoreDynamicJSON_RPC class inherits from the System.Dynamic.DynamicObje
 
 There is of course a caveat with runtime binding: if you call a method name incorrectly you wont find out until it runs, so type and test carefully! ;-)
 
-The dotnetcoreDynamicJSON_RPC class has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar daemon, such as Blockstream's [c-lightnining](https://github.com/ElementsProject/lightning). I'll test this next when I have finished the examples and documentation for Bitcoin and Elements.
+The dotnetcoreDynamicJSON_RPC class has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar daemon, such as Blockstream's [c-lightning](https://github.com/ElementsProject/lightning). I'll test this next when I have finished the examples and documentation for Bitcoin and Elements.
 
 ### Example
 
