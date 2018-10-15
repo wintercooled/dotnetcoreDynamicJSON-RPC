@@ -41,7 +41,7 @@ Now if a new version of bitcoind is released with a new method called "getsomene
 dynamicJSON.getsomenewvalue();
 ~~~~
 
-There is no need to wait for me to add that method to the class or for you to change the code in any way.
+There is no need to wait for me to add that method to the class or for you to change the code yourself in any way.
 
 **See Program.cs for example use.**
 
@@ -51,7 +51,7 @@ If you want to use it in your project: just take the code from the dotnetcoreDyn
 
 * * * 
 
-To run the code in this repository (uses Bitcoin regtest to send a few transactions, create a block and loop the transaction outputs): 
+To run the example code in Program.cs (uses Bitcoin regtest to send a few transactions, create a block and loop the transaction outputs in it): 
 
 ### If you already have the .NET Core SDK and Visual Studio Code with C# set up:
 
