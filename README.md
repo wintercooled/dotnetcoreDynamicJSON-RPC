@@ -25,15 +25,19 @@ dotnetcoreDynamicJSON-RPC has been tested with the Bitcoin daemon (bitcoind) and
 
 Let's say Bitcoin's daemon has methods availabe now called "getsomevalue" and "getsomeothervalue". You would call these by creating an instance of the dotnetcoreDynamicJSON-RPC class using the late-bound dynamic object type and calling them in your code:
 
+~~~~
 dynamic dynamicJSON = new dotnetcoreDynamicJSON(url, port, user, pword);
 dynamicJSON.getsomevalue();
 dynamicJSON.getsomeothervalue(someparam);
+~~~~
 
 Easy enough.
 
 Now if a new version of bitcoind is released with a new method called "getsomenewvalue" added all you need to to use it is call:
 
+~~~~
 dynamicJSON.getsomenewvalue();
+~~~~
 
 There is no need to wait for me to add that method to the class or for you to change the code in any way.
 
