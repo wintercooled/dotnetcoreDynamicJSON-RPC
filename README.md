@@ -35,7 +35,7 @@ e.g. For Ubuntu 18.04:
 
 Install Visual Studio Code: https://code.visualstudio.com 
 
-Open Visual Studio Code and click the Language tab on the welcome screen. Select C# from the available extensions.
+Open Visual Studio Code and click the "Tools and languages" tab on the welcome screen. Select C# from the available extensions.
 
 Install the .Net SDK: https://www.microsoft.com/net/download/linux-package-manager/ubuntu18-04/sdk-current
 
