@@ -7,7 +7,7 @@ Runs on Windows, Linux, Mac using the .Net Core cross-platform application frame
 
 ### Overview
 
-There are a few great C# .Net based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET as opposed to .NET Core based. 
+There are a few great C# .Net based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. 
 
 .NET Core is a free and open source application framework that runs on Linux, Windows and Mac OS. When combined with the free and open source Visual Studio Code IDE it is a very developer-friendly solution to multi-platform app development.
 
