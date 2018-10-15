@@ -1,13 +1,13 @@
 # dotnetcoreDynamicJSON-RPC
-## A .Net Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements, Lightning daemons etc.
+## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements, Lightning daemons etc.
 
-Runs on Windows, Linux, Mac using the .Net Core cross-platform application framework.
+Runs on Windows, Linux, Mac using the .NET Core cross-platform application framework.
 
 **Status: Work in progress.** Currently tidying up code comments and adding examples of use for [Bitcoin](https://github.com/bitcoin/bitcoin) and [Elements](https://elementsproject.org/) then i'll see how it works with [c-lightning](https://github.com/ElementsProject/lightning).
 
 ### Overview
 
-There are a few great C# .Net based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. 
+There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. 
 
 .NET Core is a free and open source application framework that runs on Linux, Windows and Mac OS. When combined with the free and open source Visual Studio Code IDE it is a very developer-friendly solution to multi-platform app development.
 
