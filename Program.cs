@@ -97,6 +97,7 @@ namespace dotnetcoreDynamicJSON_RPC
                     {
                         string voutString = vout.ToString();
                         // Using the GetProperty helper again to get the data value we want
+                        // (There is a GetValue helper that does what we need but we are demonstrating the use of GetProperty here)
                         string valueString = voutString.GetProperty("value");
                         decimal value = Convert.ToDecimal(valueString);
                         voutTotal += value;
