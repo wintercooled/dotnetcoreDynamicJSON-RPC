@@ -17,7 +17,11 @@ The code in dotnetcoreDynamicJSON-RPC.cs contains the dotnetcoreDynamicJSON-RPC 
 
 dotnetcoreDynamicJSON-RPC inherits from the System.Dynamic.DynamicObject class and also uses System.Reflection to allow methods to be evaluated at runtime. This means you can add new methods to your code as they are added to Bitcoin, Elements, some-other-rpc-daemon without having to update any references your project has. The new method calls will be evaluated at runtime and sent off to the daemon as RPC calls. If the method is avaiable in the daemon it will get executed.
 
-Example:
+There is of course a caveat with runtime binding: if you call a method name incorrectly you wont find out until it runs, so type and test carefully! ;-)
+
+dotnetcoreDynamicJSON-RPC has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar daemon, such as Blockstream's [c-lightnining](https://github.com/ElementsProject/lightning). I'll test this next when I have finished the examples and documentation for Bitcoin and Elements.
+
+### Example
 
 Let's say Bitcoin's daemon has methods availabe now called "getsomevalue" and "getsomeothervalue". You would call these by creating an instance of the dotnetcoreDynamicJSON-RPC class using the late-bound dynamic object type and calling them in your code:
 
@@ -32,10 +36,6 @@ Now if a new version of bitcoind is released with a new method called "getsomene
 dynamicJSON.getsomenewvalue();
 
 There is no need to wait for me to add that method to the class or for you to change the code in any way.
-
-There is of course a caveat with runtime binding: if you call a method name incorrectly you wont find out until it runs, so type and test carefully! ;-)
-
-dotnetcoreDynamicJSON-RPC has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar daemon, such as Blockstream's [c-lightnining](https://github.com/ElementsProject/lightning). I'll test this next when I have finished the examples and documentation for Bitcoin and Elements.
 
 **See Program.cs for example use.**
 
