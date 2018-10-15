@@ -13,20 +13,20 @@ There are a few C# .Net based RPC wrappers for the Bitcoin daemon (bitcoind) ava
 
 Strongly typed code is great to work with as it means you are not going to call a method name incorrectly as it will get highlighted at compile time. However, it does mean that for an API like Bitcoin's, the code you reference in your project will be quite sizeable and will need updating when new methods are added to the daemon. I have recently worked with the Python based [AuthServiceProxy](https://github.com/jgarzik/python-bitcoinrpc) when writing tests for an [Elements](https://github.com/ElementsProject/elements) blockchain and sidechain [tutorial](https://elementsproject.org/elements-code-tutorial/overview) I recently wrote and liked the fact it was a small and flexible tool for making RPC calls. Indeed, it was written for Bitcoin but because the method calls are dynamic it was easy to point it at an Elements daemon and make calls to new methods that Bitcoin's API does not contain without having to change the code at all. So I thought I'd give writing a similar tool in C# a go. This is still a work in progress and is currently at 'working' status with features to be added, mostly around the way it handles errors and the fact that you currently need to pass parameters in as the correct primitive type.
 
-The code in dotnetcoreDynamicJSON-RPC.cs contains the dotnetcoreDynamicJSON-RPC class plus a helper class and that's all you need to copy into your code to use it. Declare an instance of it using the dynamic keyword and you are ready to go: dynamic dynamicJSON = new dotnetcoreDynamicJSON(url, port, user, pword);
+The code in dotnetcoreDynamicJSON-RPC.cs contains the dotnetcoreDynamicJSON_RPC class plus a helper class and that's all you need to copy into your code to use it. Declare an instance of it using the dynamic keyword and you are ready to go: dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);
 
-dotnetcoreDynamicJSON-RPC inherits from the System.Dynamic.DynamicObject class and also uses System.Reflection to allow methods to be evaluated at runtime. This means you can add new methods to your code as they are added to Bitcoin, Elements, some-other-rpc-daemon without having to update any references your project has. The new method calls will be evaluated at runtime and sent off to the daemon as RPC calls. If the method is avaiable in the daemon it will get executed.
+The dotnetcoreDynamicJSON_RPC class inherits from the System.Dynamic.DynamicObject class and also uses System.Reflection to allow methods to be evaluated at runtime. This means you can add new methods to your code as they are added to Bitcoin, Elements, some-other-rpc-daemon without having to update any references your project has. The new method calls will be evaluated at runtime and sent off to the daemon as RPC calls. If the method is avaiable in the daemon it will get executed.
 
 There is of course a caveat with runtime binding: if you call a method name incorrectly you wont find out until it runs, so type and test carefully! ;-)
 
-dotnetcoreDynamicJSON-RPC has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar daemon, such as Blockstream's [c-lightnining](https://github.com/ElementsProject/lightning). I'll test this next when I have finished the examples and documentation for Bitcoin and Elements.
+The dotnetcoreDynamicJSON_RPC class has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar daemon, such as Blockstream's [c-lightnining](https://github.com/ElementsProject/lightning). I'll test this next when I have finished the examples and documentation for Bitcoin and Elements.
 
 ### Example
 
-Let's say Bitcoin's daemon has methods availabe now called "getsomevalue" and "getsomeothervalue". You would call these by creating an instance of the dotnetcoreDynamicJSON-RPC class using the late-bound dynamic object type and calling them in your code:
+Let's say Bitcoin's daemon has methods availabe now called "getsomevalue" and "getsomeothervalue". You would call these by creating an instance of the dotnetcoreDynamicJSON_RPC class using the late-bound dynamic object type and calling them in your code:
 
 ~~~~
-dynamic dynamicJSON = new dotnetcoreDynamicJSON(url, port, user, pword);
+dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);
 dynamicJSON.getsomevalue();
 dynamicJSON.getsomeothervalue(someparam);
 ~~~~
@@ -45,7 +45,7 @@ There is no need to wait for me to add that method to the class or for you to ch
 
 * * * 
 
-If you want to use it in your project: just take the code from the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project. That's it. Declare an instance of it using the dynamic keyword and you are ready to go: dynamic dynamicJSON = new dotnetcoreDynamicJSON(url, port, user, pword);
+If you want to use it in your project: just take the code from the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project. That's it. Declare an instance of it using the dynamic keyword and you are ready to go: dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);
 
 * * * 
 
