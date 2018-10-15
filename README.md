@@ -5,7 +5,7 @@ Similar in concept to [python-bitcoinrpc AuthServiceProxy](https://github.com/jg
 
 Runs on Windows, Linux, Mac using the .Net Core cross-platform application framework.
 
-**Status: Work in progress.** Currently tidying up code comments and adding examples of use for Bitcoin and Elements then i'll see how it works with [c-lightnining](https://github.com/ElementsProject/lightning).
+**Status: Work in progress.** Currently tidying up code comments and adding examples of use for [Bitcoin](https://github.com/bitcoin/bitcoin) and [Elements](https://elementsproject.org/) then i'll see how it works with [c-lightnining](https://github.com/ElementsProject/lightning).
 
 ### Overview
 
