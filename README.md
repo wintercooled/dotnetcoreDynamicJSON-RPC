@@ -43,17 +43,15 @@ dynamicJSON.getsomenewvalue();
 
 There is no need to wait for me to add that method to the class or for you to change the code yourself in any way.
 
-**See Program.cs for example use.**
-
-* * * 
+### How to use it in your project
 
 If you want to use it in your project: just take the code from the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project. That's it. Declare an instance of it using the dynamic keyword and you are ready to go: ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
 
-* * * 
+### How to run the example code in Program.cs
 
 To run the example code in Program.cs (uses Bitcoin regtest to send a few transactions, create a block and loop the transaction outputs in it): 
 
-### If you already have the .NET Core SDK and Visual Studio Code with C# set up:
+**If you already have the .NET Core SDK and Visual Studio Code with C# set up:**
 
 Clone this repository and then open the folder using Visual Studio Code's 'File/Open folder' option.
 
@@ -65,13 +63,15 @@ Click the 'Yes' buton.
 "There are unresolved dependancies. Please execute the restore command to continue"
 Click the 'Restore' button.
 
-### If you don't have the .Net Core SDK and Visual Studio Code:
+**If you don't have the .Net Core SDK and Visual Studio Code:**
 
 The Visual Studio Code IDE: https://code.visualstudio.com 
 
 You don't need the IDE as you can edit in a text editor and compile using the 'dotnet run' command from within the directory... but it is a nice IDE and debugging in it is easy. After installing Visual Studio Code you will need to add the C# language extension: open Visual Studio Code and click the "Tools and languages" tab on the welcome screen. Select C# from the available extensions. Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
 
 The .NET Core SDK is here: https://www.microsoft.com/net/download
+
+* * * 
 
 Questions? https://twitter.com/wintercooled
 
