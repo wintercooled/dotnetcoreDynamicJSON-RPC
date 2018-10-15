@@ -73,6 +73,7 @@ The .NET Core SDK is here: https://www.microsoft.com/net/download
 
 * * * 
 
-Questions? https://twitter.com/wintercooled
+Questions or Issues? https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/issues
 
-Issues? https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/issues
+I'm on Twitter: https://twitter.com/wintercooled
+
