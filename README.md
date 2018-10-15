@@ -21,7 +21,7 @@ There is of course a caveat with runtime binding: if you call a method name inco
 
 dotnetcoreDynamicJSON-RPC has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar daemon, such as Blockstream's [c-lightnining](https://github.com/ElementsProject/lightning). I'll test this next when I have finished the examples and documentation for Bitcoin and Elements.
 
-### Example
+### Example
 
 Let's say Bitcoin's daemon has methods availabe now called "getsomevalue" and "getsomeothervalue". You would call these by creating an instance of the dotnetcoreDynamicJSON-RPC class using the late-bound dynamic object type and calling them in your code:
 
