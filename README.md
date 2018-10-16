@@ -1,7 +1,7 @@
 # dotnetcoreDynamicJSON-RPC
 ## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements and other RPC enabled daemons.
 
-## Designed to be an easy-to-use tool that will run on Linux, Windows and Mac OS for quickly writing and automating the set up of blockchain states and RPC command testing (or whatever else you may need it for).
+## Designed to be an easy-to-use tool that will run on Linux, Windows and Mac OS, letting you quickly write and automate the set up of blockchain states, test RPC commands or whatever else you may find it useful for.
 
 ### Status
 
