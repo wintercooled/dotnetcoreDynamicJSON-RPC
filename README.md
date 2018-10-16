@@ -5,9 +5,7 @@
 
 Runs on Windows, Linux, Mac using the .NET Core cross-platform application framework.
 
-Working example using [Bitcoin](https://github.com/bitcoin/bitcoin) as the RPC target.
-
-Currently working on adding [Elements](https://elementsproject.org/) example use.
+Working example using [Bitcoin](https://github.com/bitcoin/bitcoin) (bitcoind) and [Elements](https://elementsproject.org/) (elementsd) as the target daemons.
 
 Future work includes trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
 
@@ -19,13 +17,19 @@ Future work includes trying to find an easy way to access [c-lightning](https://
 
 ### Overview
 
-There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. 
-
-.NET Core is a free and open source application framework that runs on Linux, Windows and Mac OS. When combined with the free and open source Visual Studio Code IDE it is a very developer-friendly solution to multi-platform app development.
+There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. Being strongly typed means they can't easily be pointed at other daemons, such as Elements, without being reworked.
 
 Strongly typed code is great to work with as it means you are not going to call a method name incorrectly as it will get highlighted at compile time. However, it does mean that for an API like Bitcoin's, the code you reference in your project will be quite sizeable and will need updating when new methods are added to the daemon. 
 
-I recently worked with the Python based [AuthServiceProxy](https://github.com/jgarzik/python-bitcoinrpc) when developing sample applications and tests for an [Elements](https://github.com/ElementsProject/elements) blockchain and sidechain [tutorial](https://elementsproject.org/elements-code-tutorial/overview). I liked the fact that it was a small and flexible tool for making RPC calls. Indeed, although it was written for Bitcoin, the method calls are dynamic and so it was easy to point it at an Elements daemon and make calls to new methods that Bitcoin's API does not contain... without having to change the code at all. So I thought I'd try writing a similar tool in C# using .NET Core. This is still a work in progress and is currently at a status of 'It works!' with a few features to be added, mostly around the way it handles errors. Also, you currently need to pass parameters in to RPC method calls using the correct primitive type (which I don't like and will change).
+.NET Core is a free and open source application framework that runs on Linux, Windows and Mac OS. When combined with the free and open source Visual Studio Code IDE it is a very developer-friendly solution to multi-platform app development.
+
+I recently worked with the Python based [AuthServiceProxy](https://github.com/jgarzik/python-bitcoinrpc) when developing sample applications and tests for an [Elements](https://github.com/ElementsProject/elements) blockchain and sidechain [tutorial](https://elementsproject.org/elements-code-tutorial/overview). I liked the fact that it was a small and flexible tool for making RPC calls. Indeed, although it was written for Bitcoin, the method calls are dynamic and so it was easy to point it at an Elements daemon and make calls to new methods that Bitcoin's API does not contain, all without having to change the code making the RPC calls. 
+
+So I thought I'd try writing a similar tool in C# using .NET Core. 
+
+This is still a work in progress and is currently at a status of 'It works!' with a few features to be added, mostly around the way it handles errors. Also, you currently need to pass parameters in to RPC method calls using the correct primitive type (which I don't like and will change).
+
+There are plenty of Bitcoin programming guides out there that outline the API calls you can make over RPC. If you are looking for one on Elements, there is the tutorial on [https://elementsproject.org](https://elementsproject.org) that covers everything from sidechain set up to Confidential Transactions and Issued Assets.
 
 ### The code
 
@@ -69,7 +73,7 @@ If you want to use it in your project: just take the code from the dotnetcoreDyn
 
 ### How to run the example code in Program.cs
 
-To run the example code in Program.cs (uses Bitcoin regtest to send a few transactions, create a block and loop the transaction outputs in it): 
+To run the example code in Program.cs (uses Bitcoin or Elements regtest to send a few transactions, create a block and loop the transaction outputs in it): 
 
 **If you already have the .NET Core SDK and Visual Studio Code with C# set up:**
 
