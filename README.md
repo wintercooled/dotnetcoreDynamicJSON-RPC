@@ -1,5 +1,5 @@
 # dotnetcoreDynamicJSON-RPC
-## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements, other RPC enabled daemons etc.
+## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements and other RPC enabled daemons.
 
 ### Status
 
