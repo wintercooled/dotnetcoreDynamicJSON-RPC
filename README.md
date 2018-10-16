@@ -5,6 +5,9 @@ Runs on Windows, Linux, Mac using the .NET Core cross-platform application frame
 
 **Status: Work in progress.** Currently tidying up code comments and adding examples of use for [Bitcoin](https://github.com/bitcoin/bitcoin) and [Elements](https://elementsproject.org/) then i'll see how it works with [c-lightning](https://github.com/ElementsProject/lightning).
 
+**dotnetcoreDynamicJSON-RPC.cs** - the actual code you can copy into your own project to wrap RPC calls.
+**Program.cs** - an example program using the code with explanations of how it works.
+
 ### Overview
 
 There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. 
