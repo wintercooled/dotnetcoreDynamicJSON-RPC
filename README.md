@@ -7,7 +7,7 @@ Runs on Windows, Linux, Mac using the .NET Core cross-platform application frame
 
 Working example using [Bitcoin](https://github.com/bitcoin/bitcoin) as the RPC target.
 
-Currently working on adding [Elements](https://elementsproject.org/) example use then i'll see how it works with [c-lightning](https://github.com/ElementsProject/lightning).
+Currently working on adding [Elements](https://elementsproject.org/) example use then I'll see how it works with [c-lightning](https://github.com/ElementsProject/lightning).
 
 **dotnetcoreDynamicJSON-RPC.cs** - the actual code you can copy into your own project to wrap RPC calls.
 
