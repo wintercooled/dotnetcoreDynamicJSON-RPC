@@ -13,11 +13,13 @@ There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoin
 
 Strongly typed code is great to work with as it means you are not going to call a method name incorrectly as it will get highlighted at compile time. However, it does mean that for an API like Bitcoin's, the code you reference in your project will be quite sizeable and will need updating when new methods are added to the daemon. 
 
-I have recently worked with the Python based [AuthServiceProxy](https://github.com/jgarzik/python-bitcoinrpc) when developing tests for an [Elements](https://github.com/ElementsProject/elements) blockchain and sidechain [tutorial](https://elementsproject.org/elements-code-tutorial/overview) I wrote and liked the fact it was a small and flexible tool for making RPC calls. Indeed, it was written for Bitcoin but, because the method calls are dynamic, it was easy to point it at an Elements daemon and make calls to new methods that Bitcoin's API does not contain without having to change the code at all. So I thought I'd give writing a similar tool in C# using .NET Core a go. This is still a work in progress and is currently at 'it works!' status with features to be added, mostly around the way it handles errors and the fact that you currently need to pass parameters in as the correct primitive type (which I don't like and will change).
+I recently worked with the Python based [AuthServiceProxy](https://github.com/jgarzik/python-bitcoinrpc) when developing tests for an [Elements](https://github.com/ElementsProject/elements) blockchain and sidechain [tutorial](https://elementsproject.org/elements-code-tutorial/overview) I wrote. I liked the fact that it was a small and flexible tool for making RPC calls. Indeed, although it was written for Bitcoin, the method calls are dynamic and so it was easy to point it at an Elements daemon and make calls to new methods that Bitcoin's API does not contain... without having to change the code at all. So I thought I'd try writing a similar tool in C# using .NET Core. This is still a work in progress and is currently at a status of 'It works!' with a few features to be added, mostly around the way it handles errors. Also, you currently need to pass parameters in to RPC method calls using the correct primitive type (which I don't like and will change).
 
-The code in dotnetcoreDynamicJSON-RPC.cs contains the **dotnetcoreDynamicJSON_RPC class** plus a helper class and that's all you need to copy into your code to use it. Declare an instance of it using the dynamic keyword and you are ready to go: ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
+### The code
 
-The **RPCResultExtensions class** in dotnetcoreDynamicJSON-RPC.cs just contains some string extension methods that let you get at values within the JSON returned and also a way to return JSON objects as System.Collections.Generic.List objects so you can iterate them easily. Usage of these is shown in Program.cs.
+The code in dotnetcoreDynamicJSON-RPC.cs contains the **dotnetcoreDynamicJSON_RPC class** plus a helper class that lets you manipulate JSON strings easily. The contents of that file is all you need to copy into your code to use it. Then just declare an instance of it using the dynamic keyword and you are ready to go: ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
+
+The **RPCResultExtensions class** within dotnetcoreDynamicJSON-RPC.cs just contains some string extension methods that let you get at values within the JSON returned and also a way to return JSON objects as System.Collections.Generic.List objects so you can iterate them easily. Program.cs shows how to use these extension methods. 
 
 The dotnetcoreDynamicJSON_RPC class inherits from the System.Dynamic.DynamicObject class and also uses System.Reflection to allow methods to be evaluated at runtime. This means you can add new methods to your code as they are added to Bitcoin, Elements, some-other-rpc-daemon without having to update any references your project has. The new method calls will be evaluated at runtime and sent off to the daemon as RPC calls. If the method is avaiable in the daemon it will get executed.
 
@@ -27,12 +29,12 @@ The dotnetcoreDynamicJSON_RPC class has been tested with the Bitcoin daemon (bit
 
 ### Example
 
-Let's say Bitcoin's daemon has methods availabe now called "getsomevalue" and "getsomeothervalue". You would call these by creating an instance of the dotnetcoreDynamicJSON_RPC class using the late-bound dynamic object type and calling them in your code:
+Let's say Bitcoin's daemon has methods availabe now called "getsomevalue" and "getsomeothervalue". You would call these by creating an instance of the dotnetcoreDynamicJSON_RPC class using the late-bound dynamic object type and call them in your code:
 
 ~~~~
 dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);
-dynamicJSON.getsomevalue();
-dynamicJSON.getsomeothervalue(someparam);
+string results1 = dynamicJSON.getsomevalue();
+string results2 = dynamicJSON.getsomeothervalue(someparam);
 ~~~~
 
 Easy enough.
@@ -40,7 +42,7 @@ Easy enough.
 Now if a new version of bitcoind is released with a new method called "getsomenewvalue" added all you need to to use it is call:
 
 ~~~~
-dynamicJSON.getsomenewvalue();
+string results3 = dynamicJSON.getsomenewvalue();
 ~~~~
 
 There is no need to wait for me to add that method to the class or for you to change the code yourself in any way.
@@ -69,7 +71,12 @@ Click the 'Restore' button.
 
 The Visual Studio Code IDE: https://code.visualstudio.com 
 
-You don't need the IDE as you can edit in a text editor and compile using the 'dotnet run' command from within the directory... but it is a nice IDE and debugging in it is easy. After installing Visual Studio Code you will need to add the C# language extension: open Visual Studio Code and click the "Tools and languages" tab on the welcome screen. Select C# from the available extensions. Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
+You don't need the IDE as you can edit in a text editor and compile using the 'dotnet run' command from within the directory, but it is a nice IDE and debugging in it is easy. 
+
+After installing Visual Studio Code you will need to add the C# language extension: 
+Open Visual Studio Code and click the "Tools and languages" tab on the welcome screen. Select C# from the available extensions. 
+
+Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
 
 The .NET Core SDK is here: https://www.microsoft.com/net/download
 
@@ -78,4 +85,3 @@ The .NET Core SDK is here: https://www.microsoft.com/net/download
 Questions or Issues? https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/issues
 
 I'm on Twitter: https://twitter.com/wintercooled
-
