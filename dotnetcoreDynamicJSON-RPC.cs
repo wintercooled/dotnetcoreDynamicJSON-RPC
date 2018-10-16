@@ -19,11 +19,6 @@ namespace dotnetcoreDynamicJSON_RPC
         private string rpcUser;
         private string rpcPassword;
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
         public dotnetcoreDynamicJSON_RPC(string rpcUrl, string rpcPort, string rpcUser, string rpcPassword)
         {
             this.rpcUrl = rpcUrl;
@@ -32,11 +27,6 @@ namespace dotnetcoreDynamicJSON_RPC
             this.rpcPassword = rpcPassword;
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
         public bool DaemonIsRunning(string parameterlessTestCommand)
         {
             try
@@ -47,11 +37,6 @@ namespace dotnetcoreDynamicJSON_RPC
             catch { return false; }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
         public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
         {
             Type type = typeof(dotnetcoreDynamicJSON_RPC);
@@ -72,11 +57,6 @@ namespace dotnetcoreDynamicJSON_RPC
             }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
         public string SendRPC(string method, object[] args)
         {
             string jsonResponse;
@@ -117,95 +97,34 @@ namespace dotnetcoreDynamicJSON_RPC
 
         public class JsonRPCRequest
         {
-            /// <summary>
-            ///
-            /// </summary>
-            /// <param name=""></param>
-            /// <returns></returns>
             public JsonRPCRequest(string method, object[] args)
             {
                 Method = method;
                 Parameters = args?.ToList() ?? new List<object>();
             }
 
-            /// <summary>
-            ///
-            /// </summary>
-            /// <param name=""></param>
-            /// <returns></returns>
             [JsonProperty(PropertyName = "method", Order = 0)]
             public string Method { get; set; }
 
-            /// <summary>
-            ///
-            /// </summary>
-            /// <param name=""></param>
-            /// <returns></returns>
             [JsonProperty(PropertyName = "params", Order = 1)]
             public IList<object> Parameters { get; set; }
 
-            /// <summary>
-            ///
-            /// </summary>
-            /// <param name=""></param>
-            /// <returns></returns>
             public string GetString()
             {
                 return JsonConvert.SerializeObject(this);
             }
 
-            /// <summary>
-            ///
-            /// </summary>
-            /// <param name=""></param>
-            /// <returns></returns>
             public byte[] GetBytes()
             {
                 return Encoding.UTF8.GetBytes(GetString());
             }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
         private static void SetAuthorizationHeader(WebRequest webRequest, string user, string password)
         {
             string credentials = user + ":" + password;
             credentials = Convert.ToBase64String(Encoding.Default.GetBytes(credentials));
             webRequest.Headers["Authorization"] = "Basic" + " " + credentials;
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        public class JsonRpcResponse<T>
-        {
-            [JsonProperty(PropertyName = "result", Order = 0)]
-            public T Result { get; set; }
-
-            [JsonProperty(PropertyName = "id", Order = 1)]
-            public int Id { get; set; }
-
-            [JsonProperty(PropertyName = "error", Order = 2)]
-            public JsonRpcError Error { get; set; }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        public class JsonRpcError
-        {
-            [JsonProperty(PropertyName = "code")]
-            public string Code { get; set; }
-
-            [JsonProperty(PropertyName = "message")]
-            public string Message { get; set; }
         }
     }
 
@@ -221,27 +140,6 @@ namespace dotnetcoreDynamicJSON_RPC
             var jObject = JObject.Parse(str);
             string result = (string)jObject.SelectToken(property);
             return result;
-        }
-
-        /// <summary>
-        /// Helper that basically calls GetProperty("result"). 
-        /// </summary>
-        /// <returns>The string value of the JSON 'result' property this extension method is applied to.</returns>
-        public static string GetResult(this String str)
-        {
-            string result = str.GetProperty("result");
-            return result;
-        }
-
-
-        /// <summary>
-        /// Helper that basically calls GetProperty("value"). 
-        /// </summary>
-        /// <returns>The string value of the JSON 'value' property this extension method is applied to.</returns>
-        public static string GetValue(this String str)
-        {
-            string value = str.GetProperty("value");
-            return value;
         }
 
         /// <summary>

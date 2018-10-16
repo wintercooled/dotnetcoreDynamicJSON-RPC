@@ -13,7 +13,8 @@ namespace dotnetcoreDynamicJSON_RPC
             // We'll be using regtest so we can create a block with known transactions in but you can skip that
             // part and just use a main or testnet block if you like (go to the "string blockHash = " line if you do).
             // We'll demonstrate how simple it is to call methods on bitcoind using dotnetcoreDynamicJSON_RPC and also
-            // take a look at how its string extension helpers let us access the JSON data returned.
+            // take a look at how its 3 string extension methods let us access the JSON data returned without the need 
+            // for complex classes to represent a block, a transaction etc.
             
             // Example RPC credentials used by bitcoind (likely set in bitcoin.conf). Up to you how you load these.
             string rpcUrl = "http://127.0.0.1";
@@ -35,11 +36,11 @@ namespace dotnetcoreDynamicJSON_RPC
                 //    "{\"result\":\"2N2RH4toZArdRMjthBJc3x3sqpeF24yLs3G\",\"error\":null,\"id\":null}\n"
                 
                 // The value we want is held in the first 'result' property: "2N2RH...etc"
-                // There is a helper method in dotnetcoreDynamicJSON_RPC that extends string so that we can get 'result' 
-                // values from JSON strings without needing to do any string manipulation here. 
-                // (There is another way to get values that are not 'result' data and we'll look at that later)
-                // For now, we'll use GetResult to get the address value from the 'result' data.
-                newAddress = newAddress.GetResult();
+                // There is a helper method called 'GetProperty' in dotnetcoreDynamicJSON_RPC that extends 
+                // string so that we can get values from JSON strings without needing to do any string manipulation here. 
+                // The 'path' parameter is dot notated so you could navigate to get deeper level values like this:
+                //    GetProperty("levelone.leveltwo.propertyyouwant");
+                newAddress = newAddress.GetProperty("result");
                 // newaddress now contains just the address as a string that we can now use.
 
                 // Send some bitcoin to the new address to create some transactions.
@@ -51,17 +52,15 @@ namespace dotnetcoreDynamicJSON_RPC
                 
                 // Now we have a block that we know contains transactions, we can get the block and loop through each transaction
                 // summing the vout amounts. You can enter your own block number here if you are not using regtest and the steps above.
-                // Here we will be using the GetResult string helper again as the result we want is within the 'result' JSON data.
                 string blockNumber = dynamicRPC.getblockcount();
-                blockNumber = blockNumber.GetResult();
+                blockNumber = blockNumber.GetProperty("result");
 
                 // Get the block hash results. This will again return a JSON formatted string.
                 string blockHash = dynamicRPC.getblockhash(Convert.ToInt16(blockNumber));
                 //  blockHash now has something like the following stored in it:
                 //  "{\"result\":\"5895ee9dbb419645bc3a09969decf4929b572b9aa733c32e9d098d364a265e15\",\"error\":null,\"id\":null}\n"
                 
-                // We can pull the 'result' value out using the 'GetResult' string extension method again.
-                blockHash = blockHash.GetResult();
+                blockHash = blockHash.GetProperty("result");
                 // blockHash will now have the value for the 'result' JSON property stored in it:
                 //  "5895ee9dbb419645bc3a09969decf4929b572b9aa733c32e9d098d364a265e15"
    
@@ -70,13 +69,6 @@ namespace dotnetcoreDynamicJSON_RPC
                 // Which returns something like:
                 //  {"result":{"hash":"4088c837fc10d2cd2e6c35312c5e239fb6c437d91109eae2cbd0bbd46ed84f72","confirmations":1,
                 //   "strippedsize":552,"size":697,"weight":2353,"height":102, ..." etc
-
-                // Now would be a good time to look at the string extension methods a little more.
-                // 'GetProperty' lets you pull out a given property value.
-                // GetResult and GetValue are in fact just shortcuts for caling GetProperty("result") and GetProperty("value")
-                // Here's how you use GetProperty (we don't actually need these values in our code so it is just for example purposes)
-                string weight = block.GetProperty("result.weight");
-                string size = block.GetProperty("result.size");
 
                 // Now we will use the 'GetStringList' string extension method to return the transactions as a List object. 
                 // We need to do this as within the results stored in 'block' there is a JSON array of tx entries that we want to access. 
@@ -92,12 +84,12 @@ namespace dotnetcoreDynamicJSON_RPC
                 {
                     string rawTransaction = dynamicRPC.getrawtransaction(txid);
     
-                    string transactionHex = rawTransaction.GetResult(); 
+                    string transactionHex = rawTransaction.GetProperty("result"); 
 
                     // Deconde the raw tx data by making another method call to the daemon
                     string decodedTransaction = dynamicRPC.decoderawtransaction(transactionHex);
                     
-                    // Now we'll use the other List based extension method - 'GetObjectList'
+                    // Now we'll use the other List based extension method 'GetObjectList'
                     // This is used to return complex objects within JSON data using the same access notation as GetStringList
                     var vouts = decodedTransaction.GetObjectList("result.vout"); 
 
