@@ -39,7 +39,7 @@ The dotnetcoreDynamicJSON_RPC class inherits from the System.Dynamic.DynamicObje
 
 There is of course a caveat with runtime binding: if you call a method name incorrectly you wont find out until it runs, so type and test carefully! ;-)
 
-The dotnetcoreDynamicJSON_RPC class has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar daemon, such as Blockstream's [c-lightning](https://github.com/ElementsProject/lightning). I'll test this next when I have finished the examples and documentation for Bitcoin and Elements.
+The dotnetcoreDynamicJSON_RPC class has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar RPC enabled daemon.
 
 ### Example
 
