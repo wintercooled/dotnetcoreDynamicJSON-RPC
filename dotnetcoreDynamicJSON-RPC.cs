@@ -27,7 +27,7 @@ namespace dotnetcoreDynamicJSON_RPC
             this.rpcPassword = rpcPassword;
         }
 
-        public bool DaemonIsRunning(string parameterlessTestCommand)
+        public bool DaemonIsRunning(string parameterlessTestCommand = "getblockcount")
         {
             try
             {
