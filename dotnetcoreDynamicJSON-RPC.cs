@@ -60,11 +60,8 @@ namespace dotnetcoreDynamicJSON_RPC
         public string SendRPC(string method, object[] args)
         {
             string jsonResponse;
-
-            Console.WriteLine(method);
-
+            //Console.WriteLine(method);
             JsonRPCRequest jsonRpcRequest = new JsonRPCRequest(method, args);
-
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(this.rpcUrl + ":" + this.rpcPort);
 
             // The following was used when testing on Windows. Needs checking as it is likely redundant
@@ -94,7 +91,6 @@ namespace dotnetcoreDynamicJSON_RPC
             }
 
             return jsonResponse;
-
         }
 
         public class JsonRPCRequest
@@ -152,9 +148,7 @@ namespace dotnetcoreDynamicJSON_RPC
         public static IList<string> GetStringList(this String str, string path)
         {
             var jObject = JObject.Parse(str);
-
             IList<string> items = jObject.SelectToken("$." + path).Select(s => (string)s).ToList();
-
             return items;
         }
 
@@ -166,9 +160,7 @@ namespace dotnetcoreDynamicJSON_RPC
         public static IList<object> GetObjectList(this String str, string path)
         {
             var jObject = JObject.Parse(str);
-
             IList<object> items = jObject.SelectToken("$." + path).Select(s => (object)s).ToList();
-
             return items;
         }
     }
