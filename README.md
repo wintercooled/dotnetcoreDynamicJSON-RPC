@@ -19,11 +19,11 @@ Future work includes trying to find an easy way to access [c-lightning](https://
 
 ### Overview
 
-There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. Being strongly typed means they can't easily be pointed at other daemons, such as Elements, without being reworked.
+There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. Being strongly typed means they can't easily be pointed at other daemons, such as Elements, without being reworked. That's not ideal if you want to test new additions you are making to an API or if you just need a lightweight tool to use to automate the setting up of test blockchain states etc.
 
-Strongly typed code is great to work with as it means you are not going to call a method name incorrectly as it will get highlighted at compile time. However, it does mean that for an API like Bitcoin's, the code you reference in your project will be quite sizeable and will need updating when new methods are added to the daemon. 
+Strongly typed code is great to work with as it means you are not going to call a method name incorrectly as it will get highlighted at compile time. It also means that for an API like Bitcoin's, the code you reference in your project will be quite sizeable and will need updating when new methods are added to the daemon. 
 
-.NET Core is a free and open source application framework that runs on Linux, Windows and Mac OS. When combined with the free and open source Visual Studio Code IDE it is a very developer-friendly solution to multi-platform app development.
+.NET Core is a free and open source application framework that runs on Linux, Windows and Mac OS, unlike .NET itself. When combined with the free and open source Visual Studio Code IDE it is a very developer-friendly solution to multi-platform app development.
 
 I recently worked with the Python based [AuthServiceProxy](https://github.com/jgarzik/python-bitcoinrpc) when developing sample applications and tests for an [Elements](https://github.com/ElementsProject/elements) blockchain and sidechain [tutorial](https://elementsproject.org/elements-code-tutorial/overview). I liked the fact that it was a small and flexible tool for making RPC calls. Indeed, although it was written for Bitcoin, the method calls are dynamic and so it was easy to point it at an Elements daemon and make calls to new methods that Bitcoin's API does not contain, all without having to change the code making the RPC calls. 
 
