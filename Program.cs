@@ -27,6 +27,10 @@ namespace dotnetcoreDynamicJSON_RPC
             // Initialise an instance of the dynamic dotnetcoreDynamicJSON_RPC class
             dynamic dynamicRPC = new dotnetcoreDynamicJSON_RPC(rpcUrl, rpcPort, rpcUsername, rpcPassword);
 
+            //dynamicRPC.thismethoddoesnotexist(1);
+            dynamicRPC.getblockhash("method exists but this parameter is dodgy");     
+            dynamicRPC.getblockhash("1"); //Wrong parameter type, should be int.
+
             try {
                 // Mine some regtest blocks and mature the coinbase so we have funds to send.
                 dynamicRPC.generate(101);
@@ -108,12 +112,13 @@ namespace dotnetcoreDynamicJSON_RPC
                     }
                 }
                 
-                Console.WriteLine("Total sum of vouts in block " + blockNumber + ": " + Convert.ToString(voutTotal));
+                Console.WriteLine("Total sum of vouts in block " + blockNumber + ": BTC " + Convert.ToString(voutTotal));
 
-                //Use these to force an error at runtime (as the methods are only evaluated at runtime they will not
+                // Use these to force an error at runtime (as the methods are only evaluated at runtime they will not
                 // produce a compile time error, so test what you write ;-)
-                //string oops = dynamicRPC.thismethoddoesnotexist(1);
-                //string oops = dynamicRPC.getblockhash("method exists but this parameter is dodgy");                
+                // dynamicRPC.thismethoddoesnotexist(1);
+                // dynamicRPC.getblockhash("method exists but this parameter is dodgy");     
+                // dynamicRPC.getblockhash("1"); //Wrong parameter type, should be int.                
             }
             catch (Exception e) {
                 Console.WriteLine(e.Message);
