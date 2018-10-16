@@ -13,6 +13,8 @@ Currently working on adding [Elements](https://elementsproject.org/) example use
 
 **Program.cs** - an example program using the code with comments explaning how it works.
 
+* * * 
+
 ### Overview
 
 There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. 
