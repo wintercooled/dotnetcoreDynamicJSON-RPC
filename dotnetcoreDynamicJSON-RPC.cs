@@ -19,6 +19,11 @@ namespace dotnetcoreDynamicJSON_RPC
         private string rpcUser;
         private string rpcPassword;
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         public dotnetcoreDynamicJSON_RPC(string rpcUrl, string rpcPort, string rpcUser, string rpcPassword)
         {
             this.rpcUrl = rpcUrl;
@@ -27,6 +32,11 @@ namespace dotnetcoreDynamicJSON_RPC
             this.rpcPassword = rpcPassword;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         public bool DaemonIsRunning(string parameterlessTestCommand)
         {
             try
@@ -37,6 +47,11 @@ namespace dotnetcoreDynamicJSON_RPC
             catch { return false; }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
         {
             Type type = typeof(dotnetcoreDynamicJSON_RPC);
@@ -57,6 +72,11 @@ namespace dotnetcoreDynamicJSON_RPC
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         public string SendRPC(string method, object[] args)
         {
             string jsonResponse;
@@ -97,29 +117,59 @@ namespace dotnetcoreDynamicJSON_RPC
 
         public class JsonRPCRequest
         {
+            /// <summary>
+            ///
+            /// </summary>
+            /// <param name=""></param>
+            /// <returns></returns>
             public JsonRPCRequest(string method, object[] args)
             {
                 Method = method;
                 Parameters = args?.ToList() ?? new List<object>();
             }
 
+            /// <summary>
+            ///
+            /// </summary>
+            /// <param name=""></param>
+            /// <returns></returns>
             [JsonProperty(PropertyName = "method", Order = 0)]
             public string Method { get; set; }
 
+            /// <summary>
+            ///
+            /// </summary>
+            /// <param name=""></param>
+            /// <returns></returns>
             [JsonProperty(PropertyName = "params", Order = 1)]
             public IList<object> Parameters { get; set; }
 
+            /// <summary>
+            ///
+            /// </summary>
+            /// <param name=""></param>
+            /// <returns></returns>
             public string GetString()
             {
                 return JsonConvert.SerializeObject(this);
             }
 
+            /// <summary>
+            ///
+            /// </summary>
+            /// <param name=""></param>
+            /// <returns></returns>
             public byte[] GetBytes()
             {
                 return Encoding.UTF8.GetBytes(GetString());
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         private static void SetAuthorizationHeader(WebRequest webRequest, string user, string password)
         {
             string credentials = user + ":" + password;
@@ -127,6 +177,11 @@ namespace dotnetcoreDynamicJSON_RPC
             webRequest.Headers["Authorization"] = "Basic" + " " + credentials;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         public class JsonRpcResponse<T>
         {
             [JsonProperty(PropertyName = "result", Order = 0)]
@@ -139,6 +194,11 @@ namespace dotnetcoreDynamicJSON_RPC
             public JsonRpcError Error { get; set; }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
         public class JsonRpcError
         {
             [JsonProperty(PropertyName = "code")]
@@ -151,6 +211,11 @@ namespace dotnetcoreDynamicJSON_RPC
 
     public static class RPCResultExtensions
     {
+        /// <summary>
+        /// Returns a string value for the property provided from the JSON string this extension method is applied to.
+        /// </summary>
+        /// <param name="property">The JSON property name path whos value we want returned. Example: from getblock result select "result.weight"</param>
+        /// <returns></returns>
         public static string GetProperty(this String str, string property)
         {
             var jObject = JObject.Parse(str);
@@ -158,18 +223,32 @@ namespace dotnetcoreDynamicJSON_RPC
             return result;
         }
 
+        /// <summary>
+        /// Helper that basically calls GetProperty("result"). 
+        /// </summary>
+        /// <returns>The string value of the JSON 'result' property this extension method is applied to.</returns>
         public static string GetResult(this String str)
         {
             string result = str.GetProperty("result");
             return result;
         }
 
+
+        /// <summary>
+        /// Helper that basically calls GetProperty("value"). 
+        /// </summary>
+        /// <returns>The string value of the JSON 'value' property this extension method is applied to.</returns>
         public static string GetValue(this String str)
         {
             string value = str.GetProperty("value");
             return value;
         }
 
+        /// <summary>
+        /// Returns an IList of strings from the array of JSON data located at the 'path' specified.  
+        /// </summary>
+        /// <param name="path">The path to the array of objects you want returned from the JSON string this extension method is used on. Example: from getblock result select "result.tx"</param>
+        /// <returns>An IList of strings</returns>
         public static IList<string> GetStringList(this String str, string path)
         {
             var jObject = JObject.Parse(str);
@@ -179,6 +258,11 @@ namespace dotnetcoreDynamicJSON_RPC
             return items;
         }
 
+        /// <summary>
+        /// Returns an IList of objects from the array of JSON data located at the 'path' specified.  
+        /// </summary>
+        /// <param name="path">The path to the array of objects you want returned from the JSON string this extension method is used on. Example: from decoderawtransaction result select "result.vout"</param>
+        /// <returns>An IList of objects</returns>
         public static IList<object> GetObjectList(this String str, string path)
         {
             var jObject = JObject.Parse(str);
