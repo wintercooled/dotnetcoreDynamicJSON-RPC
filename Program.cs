@@ -8,25 +8,34 @@ namespace dotnetcoreDynamicJSON_RPC
     {
         static void Main(string[] args)
         {   
-            // Example of use with bitcoind
-            // ****************************
-            // Before this example will work you will need to have bitcoind running in regtest mode.
-            // See: https://bitcoin.org/en/developer-examples#regtest-mode
+            // Example of use with bitcoind or elementsd
+            // ******************************************
+            // Before this example will work you will need to have bitcoind or elementsd running in regtest mode.
+            //
+            // If you are using Bitcoin as the target daemon see: https://bitcoin.org/en/developer-examples#regtest-mode
             // 
-            // We'll be using regtest so we can create a block with known transactions in it and then query bitcoind 
+            // If you are using Elements, please refer to the tutorial on https://elementsproject.org for details
+            // of how to set up Elements. The tutorial also covers how to use Confidential Transactions and Asset Issuance etc. 
+            // Note: Because Elements uses Confidential Transactions the vout total we calculate will actually just sum the 
+            // total of the fees paid by the transactions, the other values will be blinded.
+            //
+            // In the code below we will be using regtest so we can create a block with known transactions in it and then query the daemon 
             // and sum the vout values for each transaction in the block.
             // 
-            // We'll demonstrate how simple it is to call methods on bitcoind using dotnetcoreDynamicJSON_RPC and also
+            // We'll demonstrate how simple it is to call methods on the daemon using dotnetcoreDynamicJSON_RPC and also
             // take a look at how its 3 string extension methods let us access the JSON data returned without the need 
             // for complex classes to represent a block, transaction etc.
+            //
+            // Note: Where example return values are shown below they have been taken from bitcoind responses, but will be similar for elementsd.
             
-            // Set up your own RPC credentials as used by your own bitcoind instance (likely set in bitcoin.conf). 
+            // Set up your own RPC credentials as used by your own bitcoind or elementsd instance (likely set in bitcoin.conf/elements.conf). 
             // It's up to you how you load these, we'll just hard code them here for now.
+            
             string rpcUrl = "http://127.0.0.1";
             string rpcPort = "8332";
             string rpcUsername = "yourrpcuser";
             string rpcPassword = "yourrpcpassword";
-
+            
             // Initialise an instance of the dynamic dotnetcoreDynamicJSON_RPC class.
             dynamic dynamicRPC = new dotnetcoreDynamicJSON_RPC(rpcUrl, rpcPort, rpcUsername, rpcPassword);
 
@@ -64,7 +73,7 @@ namespace dotnetcoreDynamicJSON_RPC
                     blockNumber = blockNumber.GetProperty("result");
 
                     // Get the block hash results.
-                    // Note here that we have to pass the correct type in to the getblockhash method or bitcoind will throw an error.
+                    // Note here that we have to pass the correct type in to the getblockhash method or the daemon will throw an error.
                     string blockHash = dynamicRPC.getblockhash(Convert.ToInt16(blockNumber));
                     //  blockHash now has something like the following stored in it:
                     //  "{\"result\":\"5895ee9dbb419645bc3a09969decf4929b572b9aa733c32e9d098d364a265e15\",\"error\":null,\"id\":null}\n"
@@ -73,7 +82,7 @@ namespace dotnetcoreDynamicJSON_RPC
                     // blockHash will now have the result value in it:
                     //  "5895ee9dbb419645bc3a09969decf4929b572b9aa733c32e9d098d364a265e15"
     
-                    // We can now use this as a parameter for the getblock command which will rturn the block data including transaction data.
+                    // We can now use this as a parameter for the getblock command which will return the block data including transaction data.
                     string block = dynamicRPC.getblock(blockHash);
 
                     // Which returns something like:
@@ -82,7 +91,7 @@ namespace dotnetcoreDynamicJSON_RPC
 
                     // Now we will use the GetStringList string extension method to return the transactions as a List of objects. 
                     // We need to do this as within the results stored in 'block' there is a JSON array of tx entries that we want to access. 
-                    // We can get to this data using the dot path notation "result.tx" as a parameter to GetStringList.
+                    // We can get to this data using the 'dot' path notation "result.tx" as a parameter to GetStringList.
                     var transactions = block.GetStringList("result.tx");
                     
                     // Using Linq on the JSON results
@@ -129,6 +138,10 @@ namespace dotnetcoreDynamicJSON_RPC
                         // Iterating through the returned vouts List we can sum the 'value' property of each vout
                         foreach (var vout in vouts)
                         {
+                            // Note that if you are targeting the Elements daemon, only the fee vout will have a 'value' property as the other 
+                            // vouts will be blinded as Confidential Transactions and 'value' will be replaced by 'value-minimum' and 'value-maximum' 
+                            // until unblinded. In the code below 'Convert.ToDecimal()' will therefore default to zero for blinded Elements vouts.
+                            // See the tutorial on https://elementsproject.org for details of how to unblind the values if needed. 
                             string voutString = vout.ToString();
                             string valueString = voutString.GetProperty("value");
                             decimal value = Convert.ToDecimal(valueString);
@@ -136,9 +149,9 @@ namespace dotnetcoreDynamicJSON_RPC
                         }
                     }
                     
-                    // That's it! You've used dynamic method calls to send requests to bitcoind and the 3 string extension methods to 
+                    // That's it! You've used dynamic method calls to send requests to the daemon and the 3 string extension methods to 
                     // read and handle the returned JSON formatted data. 
-                    Console.WriteLine("Total sum of vouts in block " + blockNumber + ": BTC " + Convert.ToString(voutTotal));
+                    Console.WriteLine("Total sum of vouts in block " + blockNumber + ": " + Convert.ToString(voutTotal));
 
                     // Use the following to force an error at runtime for testing etc:
                     // As the method calls to dotnetcoreDynamicJSON_RPC are only evaluated at runtime they will not
@@ -152,7 +165,7 @@ namespace dotnetcoreDynamicJSON_RPC
                 }
             else
             {
-                Console.WriteLine("Could not communicate with bitcoind");
+                Console.WriteLine("Could not communicate with daemon");
             }
         }
     }
