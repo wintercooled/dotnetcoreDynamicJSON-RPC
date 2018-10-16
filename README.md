@@ -73,7 +73,22 @@ If you want to use it in your project: just take the code from the dotnetcoreDyn
 
 ### How to run the example code in Program.cs
 
-To run the example code in Program.cs (uses Bitcoin or Elements regtest to send a few transactions, create a block and loop the transaction outputs in it): 
+To run the example code in Program.cs which uses Bitcoin or Elements regtest to send a few transactions, create a block and loop the transaction outputs in it: 
+
+**If you don't have the .Net Core SDK:**
+
+The .NET Core SDK is here: https://www.microsoft.com/net/download
+
+You don't need Visual Studio Code as you can just clone this repository, move into the new directory and run the ```dotnet run``` command from the terminal to compile and run the code.
+
+**Visual Studio Code:**
+
+Visual Studio Code is a nice IDE and debugging in it is easy so it is easy to recommend. https://code.visualstudio.com 
+
+After installing Visual Studio Code you will need to add the C# language extension: 
+Open Visual Studio Code and click the "Tools and languages" tab on the welcome screen. Select C# from the available extensions. 
+
+Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
 
 **If you already have the .NET Core SDK and Visual Studio Code with C# set up:**
 
@@ -86,19 +101,6 @@ Click the 'Yes' buton.
 
 "There are unresolved dependancies. Please execute the restore command to continue"
 Click the 'Restore' button.
-
-**If you don't have the .Net Core SDK and Visual Studio Code:**
-
-The Visual Studio Code IDE: https://code.visualstudio.com 
-
-You don't need the IDE as you can edit in a text editor and compile using the 'dotnet run' command from within the directory, but it is a nice IDE and debugging in it is easy. 
-
-After installing Visual Studio Code you will need to add the C# language extension: 
-Open Visual Studio Code and click the "Tools and languages" tab on the welcome screen. Select C# from the available extensions. 
-
-Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
-
-The .NET Core SDK is here: https://www.microsoft.com/net/download
 
 * * * 
 
