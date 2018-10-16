@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq; //Only needed if you are using Linq directly in your project code
+using Newtonsoft.Json.Linq; //Only needed if you are using Linq directly in your project code
 
 namespace dotnetcoreDynamicJSON_RPC 
 {
@@ -73,6 +75,7 @@ namespace dotnetcoreDynamicJSON_RPC
     
                     // We can now use this as a parameter for the getblock command which will rturn the block data including transaction data.
                     string block = dynamicRPC.getblock(blockHash);
+
                     // Which returns something like:
                     //  {"result":{"hash":"4088c837fc10d2cd2e6c35312c5e239fb6c437d91109eae2cbd0bbd46ed84f72","confirmations":1,
                     //   "strippedsize":552,"size":697,"weight":2353,"height":102, ..." etc, including the transaction data.
@@ -82,6 +85,28 @@ namespace dotnetcoreDynamicJSON_RPC
                     // We can get to this data using the dot path notation "result.tx" as a parameter to GetStringList.
                     var transactions = block.GetStringList("result.tx");
                     
+                    // Using Linq on the JSON results
+                    // ******************************
+                    // The string extension methods (like GetStringList) actually use System.Linq and Newtonsoft.Json.Linq to get the 
+                    // results and convert them to the required data type for you. 
+                    // You can do that in your code yourself should you want to using similar syntax to the example below. 
+                    // Here's an example of using Linq to select the transactions from the result.tx JSON array:
+                    JObject jObj = JObject.Parse(block);  
+                    var transactionsLinq = 
+                        from tx in jObj["result"]["tx"]
+                        select tx;
+
+                    // You can then iterate through them like this:
+                    foreach (var tx in transactionsLinq)
+                    {
+                        Console.WriteLine(tx);
+                    }
+                    // That's what the string extension methods are doing, executing Linq and returning the results as 
+                    // the required type (string, IList<string>, IList<object>) for convenience. Anyway, you can use Linq in your
+                    // code should you want to. If not, you do not need to include the Newtonsoft.Json.Linq and System.Linq using statements
+                    // that are at the top of this file within your own code.
+                    // Leaving Linq and geting back to the main example...
+
                     // We'll need somewhere to save our running total
                     decimal voutTotal = 0;
                     

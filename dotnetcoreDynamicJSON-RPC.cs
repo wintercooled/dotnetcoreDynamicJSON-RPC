@@ -1,14 +1,14 @@
 using System;
-using System.Dynamic;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using System.Net;
+using System.Reflection;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 
 namespace dotnetcoreDynamicJSON_RPC
 {
@@ -67,6 +67,8 @@ namespace dotnetcoreDynamicJSON_RPC
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(this.rpcUrl + ":" + this.rpcPort);
 
+            // The following was used when testing on Windows. Needs checking as it is likely redundant
+            // due to other code changes here. Removing for now.
             //SetAuthorizationHeader(webRequest, this.rpcUser, this.rpcPassword);
 
             webRequest.Credentials = new NetworkCredential(this.rpcUser, this.rpcPassword);
