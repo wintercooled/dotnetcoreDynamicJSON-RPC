@@ -21,7 +21,7 @@ The code in dotnetcoreDynamicJSON-RPC.cs contains the **dotnetcoreDynamicJSON_RP
 
 ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
 
-The **RPCResultExtensions class** within dotnetcoreDynamicJSON-RPC.cs just contains some string extension methods that provide data from the JSON strings the daemons return as easy to handle data types: ```string, IList<string>, IList<object>```. Program.cs shows how to use these extension methods. The extension methods actually use Linq to select the data they return and you can use Linq to directly query the JSON results returned by dotnetcoreDynamicJSON_RPC if you want, an example of how to do this is also shown in Program.cs.
+The **RPCResultExtensions class** within dotnetcoreDynamicJSON-RPC.cs just contains some string extension methods that provide data from the JSON strings the daemons return as easy to handle data types: ```string, IList<string>, IList<object>```. Program.cs shows how to use these extension methods. The extension methods actually use Linq to select the data they return and you can use Linq to directly query the JSON results returned by dotnetcoreDynamicJSON_RPC if you want. An example of how to do this is also shown in Program.cs.
 
 The dotnetcoreDynamicJSON_RPC class inherits from the System.Dynamic.DynamicObject class and also uses System.Reflection to allow methods to be evaluated at runtime. This means you can add new methods to your code as they are added to Bitcoin, Elements, some-other-rpc-daemon without having to update any references your project has. The new method calls will be evaluated at runtime and sent off to the daemon as RPC calls. If the method is avaiable in the daemon it will get executed.
 
