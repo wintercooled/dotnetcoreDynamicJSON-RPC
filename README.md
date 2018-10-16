@@ -17,7 +17,9 @@ I recently worked with the Python based [AuthServiceProxy](https://github.com/jg
 
 ### The code
 
-The code in dotnetcoreDynamicJSON-RPC.cs contains the **dotnetcoreDynamicJSON_RPC class** plus a helper class that lets you manipulate JSON strings easily. The contents of that file is all you need to copy into your code to use it. Then just declare an instance of it using the dynamic keyword and you are ready to go: ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
+The code in dotnetcoreDynamicJSON-RPC.cs contains the **dotnetcoreDynamicJSON_RPC class** plus a helper class that lets you manipulate JSON strings easily. The contents of that file is all you need to copy into your code to use it. Then just declare an instance of it using the dynamic keyword and you are ready to go:
+
+```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
 
 The **RPCResultExtensions class** within dotnetcoreDynamicJSON-RPC.cs just contains some string extension methods that let you get at values within the JSON returned and also a way to return JSON objects as System.Collections.Generic.List objects so you can iterate them easily. Program.cs shows how to use these extension methods. 
 
@@ -49,7 +51,9 @@ There is no need to wait for me to add that method to the class or for you to ch
 
 ### How to use it in your project
 
-If you want to use it in your project: just take the code from the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project. That's it. Declare an instance of it using the dynamic keyword and you are ready to go: ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
+If you want to use it in your project: just take the code from the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project. That's it. Declare an instance of it using the dynamic keyword and you are ready to go: 
+
+```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
 
 ### How to run the example code in Program.cs
 
