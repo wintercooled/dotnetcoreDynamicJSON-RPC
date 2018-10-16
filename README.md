@@ -1,5 +1,5 @@
 # dotnetcoreDynamicJSON-RPC
-## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements, Lightning daemons etc.
+## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements, other RPC enabled daemons etc.
 
 ### Status
 
@@ -7,7 +7,9 @@ Runs on Windows, Linux, Mac using the .NET Core cross-platform application frame
 
 Working example using [Bitcoin](https://github.com/bitcoin/bitcoin) as the RPC target.
 
-Currently working on adding [Elements](https://elementsproject.org/) example use then I'll see how it works with [c-lightning](https://github.com/ElementsProject/lightning).
+Currently working on adding [Elements](https://elementsproject.org/) example use.
+
+Future work includes trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
 
 **dotnetcoreDynamicJSON-RPC.cs** - the actual code you can copy into your own project to wrap RPC calls.
 
