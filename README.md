@@ -75,7 +75,16 @@ If you want to use it in your project: just take the code from the dotnetcoreDyn
 
 ### How to run the example code in Program.cs
 
-To run the example code in Program.cs which uses Bitcoin or Elements regtest to send a few transactions, create a block and loop the transaction outputs in it: 
+The example code in Program.cs uses Bitcoin or Elements regtest to send a few transactions, create a block and loop the transaction outputs in it.
+
+Make sure bitcoind or elementsd is running in regtest mode and the RPC details in the code match those used by the daemon.
+
+Clone the repository, move into the new folder and run the code...
+~~~~
+git clone https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC.git
+cd dotnetcoreDynamicJSON-RPC 
+dotnet run
+~~~~
 
 **If you don't have the .Net Core SDK:**
 
@@ -83,13 +92,12 @@ The code targets version 2.1 of the .NET Core framework.
 
 The .NET Core SDK is here: https://www.microsoft.com/net/download
 
-You don't need Visual Studio Code as you can just clone this repository, move into the new directory and run the ```dotnet run``` command from the terminal to compile and run the code.
-
 **Visual Studio Code:**
 
-Visual Studio Code is a nice IDE and debugging in it is easy so it is easy to recommend. https://code.visualstudio.com 
+You don't need Visual Studio Code to edit the code, you can use any text editor. Visual Studio Code is a nice IDE and debugging in it is easy though, so it is easy to recommend. https://code.visualstudio.com 
 
 After installing Visual Studio Code you will need to add the C# language extension: 
+
 Open Visual Studio Code and click the "Tools and languages" tab on the welcome screen. Select C# from the available extensions. 
 
 Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
@@ -103,10 +111,12 @@ Clone this repository and then open the folder using Visual Studio Code's 'File/
 You will see two prompts:
 
 "Required assets to build and debug are missing. Add them?"
-Click the 'Yes' buton.
+
+- Click the 'Yes' buton.
 
 "There are unresolved dependancies. Please execute the restore command to continue"
-Click the 'Restore' button.
+
+- Click the 'Restore' button.
 
 * * * 
 
