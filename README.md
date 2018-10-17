@@ -35,7 +35,7 @@ There are plenty of Bitcoin programming guides out there that outline the API ca
 
 ### The code
 
-The code in dotnetcoreDynamicJSON-RPC.cs contains the **dotnetcoreDynamicJSON_RPC class** plus a helper class that lets you manipulate JSON strings easily. The contents of that file is all you need to copy into your code to use it. Then just declare an instance of it using the dynamic keyword and you are ready to go:
+The code in dotnetcoreDynamicJSON-RPC.cs contains the **dotnetcoreDynamicJSON_RPC class** plus a helper class that lets you manipulate JSON strings easily. The contents of that file is all you need to copy into your code to use it (plus a reference to Newtonsoft.Json in your project's [.csproj](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/blob/master/dotnetcoreDynamicJSON-RPC.csproj) file). Then just declare an instance of it using the dynamic keyword and you are ready to go:
 
 ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
 
@@ -69,7 +69,7 @@ There is no need to wait for me to add that method to the class or for you to ch
 
 ### How to use it in your project
 
-If you want to use it in your project: just take the code from the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project. That's it. Declare an instance of it using the dynamic keyword and you are ready to go: 
+If you want to use it in your project: just take the code from the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project (plus add a reference to Newtonsoft.Json in your project's [.csproj](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/blob/master/dotnetcoreDynamicJSON-RPC.csproj) file). That's it. Declare an instance of it using the dynamic keyword and you are ready to go: 
 
 ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
 
