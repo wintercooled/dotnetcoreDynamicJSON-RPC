@@ -79,6 +79,8 @@ To run the example code in Program.cs which uses Bitcoin or Elements regtest to 
 
 **If you don't have the .Net Core SDK:**
 
+The code targets version 2.1 of the .NET Core framework.
+
 The .NET Core SDK is here: https://www.microsoft.com/net/download
 
 You don't need Visual Studio Code as you can just clone this repository, move into the new directory and run the ```dotnet run``` command from the terminal to compile and run the code.
@@ -93,6 +95,8 @@ Open Visual Studio Code and click the "Tools and languages" tab on the welcome s
 Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
 
 **If you already have the .NET Core SDK and Visual Studio Code with C# set up:**
+
+Note: The code targets version 2.1 of the .NET Core framework.
 
 Clone this repository and then open the folder using Visual Studio Code's 'File/Open folder' option.
 
