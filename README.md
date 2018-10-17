@@ -118,7 +118,7 @@ You will see two prompts:
 
 - Click the 'Restore' button.
 
-**Visual Studio 2017 (Windows only)**
+**Visual Studio 2017 (Windows only):**
 
 Clone this repository and then open the .csproj project file using Visual Studio's 'File/Open Project/Solution' option.
 
