@@ -9,7 +9,7 @@ Runs on Windows, Linux, Mac using the .NET Core cross-platform application frame
 
 Working example using [Bitcoin](https://github.com/bitcoin/bitcoin) (bitcoind) and [Elements](https://elementsproject.org/) (elementsd) as the target daemons.
 
-Future work includes testing against a Liquid node and trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
+Future work includes testing against a [Liquid](https://blockstream.com/liquid/) node and trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
 
 **dotnetcoreDynamicJSON-RPC.cs** - the actual code you can copy into your own project to wrap RPC calls.
 
