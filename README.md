@@ -19,7 +19,7 @@ Future work includes trying to find an easy way to access [c-lightning](https://
 
 ### Overview
 
-There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based. Being strongly typed means they can't easily be pointed at other daemons, such as Elements, without being reworked. That's not ideal if you want to test new additions you are making to an API or if you just need a lightweight tool to use to automate the setting up of test blockchain states etc.
+There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based and therfore only work on Windows. Being strongly typed means they can't easily be pointed at other daemons, such as Elements, without being reworked. That's not ideal if you want to test new additions you are making to an API or if you just need a lightweight tool to use to automate the setting up of test blockchain states etc.
 
 Strongly typed code is great to work with as it means you are not going to call a method name incorrectly as it will get highlighted at compile time. It also means that for an API like Bitcoin's, the code you reference in your project will be quite sizeable and will need updating when new methods are added to the daemon. 
 
