@@ -10,6 +10,9 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+// The latest version of this code can be found here:
+// https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC
+
 namespace DotnetcoreDynamicJSONRPC
 {
     class DynamicRPC : DynamicObject
