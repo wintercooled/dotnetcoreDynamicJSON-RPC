@@ -2,7 +2,7 @@
 using System.Linq; //Only needed if you are using Linq directly in your project code
 using Newtonsoft.Json.Linq; //Only needed if you are using Linq directly in your project code
 
-namespace dotnetcoreDynamicJSON_RPC 
+namespace DotnetcoreDynamicJSONRPC 
 {
     class Program
     {
@@ -37,7 +37,7 @@ namespace dotnetcoreDynamicJSON_RPC
             string rpcPassword = "yourrpcpassword";
             
             // Initialise an instance of the dynamic dotnetcoreDynamicJSON_RPC class.
-            dynamic dynamicRPC = new dotnetcoreDynamicJSON_RPC(rpcUrl, rpcPort, rpcUsername, rpcPassword);
+            dynamic dynamicRPC = new DynamicRPC(rpcUrl, rpcPort, rpcUsername, rpcPassword);
 
             if (dynamicRPC.DaemonIsRunning())
                 try {

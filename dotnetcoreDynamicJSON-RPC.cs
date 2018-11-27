@@ -10,16 +10,16 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace dotnetcoreDynamicJSON_RPC
+namespace DotnetcoreDynamicJSONRPC
 {
-    class dotnetcoreDynamicJSON_RPC : DynamicObject
+    class DynamicRPC : DynamicObject
     {
         private string rpcUrl;
         private string rpcPort;
         private string rpcUser;
         private string rpcPassword;
 
-        public dotnetcoreDynamicJSON_RPC(string rpcUrl, string rpcPort, string rpcUser, string rpcPassword)
+        public DynamicRPC(string rpcUrl, string rpcPort, string rpcUser, string rpcPassword)
         {
             this.rpcUrl = rpcUrl;
             this.rpcPort = rpcPort;
@@ -39,7 +39,7 @@ namespace dotnetcoreDynamicJSON_RPC
 
         public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
         {
-            Type type = typeof(dotnetcoreDynamicJSON_RPC);
+            Type type = typeof(DynamicRPC);
             
             try {
             result = type.InvokeMember(
