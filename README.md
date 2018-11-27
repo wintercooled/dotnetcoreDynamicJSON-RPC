@@ -3,6 +3,8 @@
 
 ## Designed to be an easy-to-use tool that will run on Linux, Windows and Mac OS, letting you quickly write and automate the set up of blockchain states, test RPC commands or whatever else you may find it useful for.
 
+## An example of how to use the dotnetcoreDynamicJSON-RPC class in a .NET Core MVC app can be found [here](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC_MVCExample).
+
 ### Status
 
 Runs on Windows, Linux, Mac using the .NET Core cross-platform application framework.
