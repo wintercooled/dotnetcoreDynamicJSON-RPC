@@ -1,5 +1,5 @@
 # dotnetcoreDynamicJSON-RPC
-## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements, Liquid and other RPC enabled daemons.
+## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to [Bitcoin](https://github.com/bitcoin/bitcoin), [Elements](https://elementsproject.org/), [Liquid](https://blockstream.com/liquid/) and other RPC enabled daemons.
 
 ## Runs on Linux, Windows and Mac OS, letting you quickly write node-connected applications, automate the set up of blockchain states, test RPC commands, or whatever else you may find it useful for.
 
@@ -7,9 +7,7 @@
 
 ### Status
 
-Runs on Linux, Windows, Mac using the .NET Core cross-platform application framework.
-
-Program.cs contains a working example using [Bitcoin](https://github.com/bitcoin/bitcoin) (bitcoind) and [Elements](https://elementsproject.org/) (elementsd) as the target daemons.
+Program.cs contains a working example using Bitcoin (bitcoind) and Elements (elementsd) as the target daemons.
 
 Future work includes trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
 
@@ -21,33 +19,33 @@ Future work includes trying to find an easy way to access [c-lightning](https://
 
 ### Overview
 
-There are a few great C# .NET based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based and only work on Windows. Being strongly typed means they can't easily be pointed at other daemons, such as Elements, without being reworked. That's not ideal if you want to test new additions you are making to an API or if you just need a lightweight tool to use to automate the setting up of test blockchain states etc.
+There are a few great C# based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based and only work on Windows. Being strongly typed means they can't easily be pointed at other daemons, such as Elements, without being reworked. That's not ideal if you want a lightweight piece of code that can connect to different types of node.
 
-Strongly typed code is great to work with as it means you are not going to call a method name incorrectly as it will get highlighted at compile time. It also means that for an API like Bitcoin's, the code you reference in your project will be quite sizeable and will need updating when new methods are added to the daemon. 
-
-.NET Core is a free and open source application framework that runs on Linux, Windows and Mac OS, unlike .NET itself. When combined with the free and open source Visual Studio Code IDE it is a very developer-friendly solution to multi-platform app development.
+Strongly typed code is great to work with as it means you are not going to call a method name incorrectly as it will get highlighted at compile time, but it also means that for an API like Bitcoin's, the code you reference in your project will be quite sizeable and will need updating when new methods are added to the daemon. 
 
 I recently worked with the Python based [AuthServiceProxy](https://github.com/jgarzik/python-bitcoinrpc) when developing sample applications and tests for an [Elements](https://github.com/ElementsProject/elements) blockchain and sidechain [tutorial](https://elementsproject.org/elements-code-tutorial/overview). I liked the fact that it was a small and flexible tool for making RPC calls. Indeed, although it was written for Bitcoin, the method calls are dynamic and so it was easy to point it at an Elements daemon and make calls to new methods that Bitcoin's API does not contain, all without having to change the code making the RPC calls. 
 
 So I thought I'd try writing a similar tool in C# using .NET Core. 
 
-This is still a work in progress and is currently at a status of 'It works!' with a few features to be added, mostly around the way it handles errors. Also, you currently need to pass parameters in to RPC method calls using the correct primitive type (which I don't like and will change).
+.NET Core, a free and open source application framework that runs on Linux, Windows and Mac OS. When combined with the free and open source Visual Studio Code IDE it is a very developer-friendly solution to multi-platform app development.
 
-There are plenty of Bitcoin programming guides out there that outline the API calls you can make over RPC. If you are looking for one on Elements, there is the tutorial on [https://elementsproject.org](https://elementsproject.org) that covers everything from sidechain set up to Confidential Transactions and Issued Assets.
+I chose to develop a solution that was not strongly typed and instead uses Reflection and DynamicObject to resolve methods at runtime. This means the code is contained in just one small class and can be directed at any RPC enabled node with ease.
+
+This is still a work in progress - you currently need to pass parameters in to RPC method calls using the correct primitive type (which I don't like and will change).
+
+There are plenty of Bitcoin programming guides out there that outline the API calls you can make over RPC. If you are looking for one on Elements or Liquid, there is the tutorial on [https://elementsproject.org](https://elementsproject.org) that covers everything from sidechain set up to Confidential Transactions and Issued Assets.
 
 ### The code
 
-The code in dotnetcoreDynamicJSON-RPC.cs contains the **dotnetcoreDynamicJSON_RPC class** plus a helper class that lets you manipulate JSON strings easily. The contents of that file is all you need to copy into your code to use it (plus a reference to Newtonsoft.Json in your project's [.csproj](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/blob/master/dotnetcoreDynamicJSON-RPC.csproj) file). Then just declare an instance of it using the dynamic keyword and you are ready to go:
+The code in dotnetcoreDynamicJSON-RPC.cs contains the awkwardly named **dotnetcoreDynamicJSON_RPC class**, plus a helper class that lets you manipulate JSON strings easily. The contents of that file is all you need to copy into your code to use it (plus a [reference to Newtonsoft.Json](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/blob/master/dotnetcoreDynamicJSON-RPC.csproj) in your project's .csproj file). Then just declare an instance of it using the dynamic keyword and you are ready to go!
 
 ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
 
-The **RPCResultExtensions class** within dotnetcoreDynamicJSON-RPC.cs just contains some string extension methods that provide data from the JSON strings the daemons return as easy to handle data types: ```string, IList<string>, IList<object>```. Program.cs shows how to use these extension methods. The extension methods actually use Linq to select the data they return and you can use Linq to directly query the JSON results returned by dotnetcoreDynamicJSON_RPC if you want. An example of how to do this is also shown in Program.cs.
+The **RPCResultExtensions class** within dotnetcoreDynamicJSON-RPC.cs just contains some string extension methods that provide data from the JSON strings the daemons return as easy to handle data types: ```string``` or ```IList<string>``` or ```IList<object>```. Program.cs shows how to use these extension methods. The extension methods actually use Linq to select the data they return and you can use Linq to directly query the JSON results returned by dotnetcoreDynamicJSON_RPC if you want. An example of how to do this is also shown in Program.cs.
 
-The dotnetcoreDynamicJSON_RPC class inherits from the System.Dynamic.DynamicObject class and also uses System.Reflection to allow methods to be evaluated at runtime. This means you can add new methods to your code as they are added to Bitcoin, Elements, some-other-rpc-daemon without having to update any references your project has. The new method calls will be evaluated at runtime and sent off to the daemon as RPC calls. If the method is avaiable in the daemon it will get executed.
+The dotnetcoreDynamicJSON_RPC class inherits from the System.Dynamic.DynamicObject class and also uses System.Reflection to allow methods to be evaluated at runtime. This means you can add new methods to your code as they are added to Bitcoin, Elements, Liquid, some-other-rpc-daemon without having to update any references your project has. The new method calls will be evaluated at runtime and sent off to the daemon as RPC calls. If the method is avaiable in the daemon, it will get executed.
 
 There is of course a caveat with runtime binding: if you call a method name incorrectly you wont find out until it runs, so type and test carefully! ;-)
-
-The dotnetcoreDynamicJSON_RPC class has been tested with the Bitcoin daemon (bitcoind) and Elements daemon (elementsd) but there is no reason it can't be pointed at any similar RPC enabled daemon.
 
 ### Example
 
@@ -71,7 +69,7 @@ There is no need to wait for me to add that method to the class or for you to ch
 
 ### How to use it in your project
 
-If you want to use it in your project: just take the code from the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project (plus add a reference to Newtonsoft.Json in your project's [.csproj](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/blob/master/dotnetcoreDynamicJSON-RPC.csproj) file). That's it. Declare an instance of it using the dynamic keyword and you are ready to go: 
+If you want to use it in your project: just take the dotnetcoreDynamicJSON-RPC.cs file and drop that in your project (plus add [a reference to Newtonsoft.Json](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/blob/master/dotnetcoreDynamicJSON-RPC.csproj) in your project's .csproj file). That's it. Declare an instance of it using the dynamic keyword and you are ready to go: 
 
 ```dynamic dynamicJSON = new dotnetcoreDynamicJSON_RPC(url, port, user, pword);```
 
@@ -81,28 +79,30 @@ The example code in Program.cs uses Bitcoin or Elements regtest to send a few tr
 
 Make sure bitcoind or elementsd is running in regtest mode and the RPC details in the code match those used by the daemon.
 
-Clone the repository, move into the new folder and run the code...
+Clone the repository, move into the new folder, run the code...
 ~~~~
 git clone https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC.git
 cd dotnetcoreDynamicJSON-RPC 
 dotnet run
 ~~~~
 
+That's it!
+
 **If you don't have the .Net Core SDK:**
 
 The code targets version 2.1 of the .NET Core framework.
 
-The .NET Core SDK is here: https://www.microsoft.com/net/download
+The .NET Core SDK is here: [https://www.microsoft.com/net/download](https://www.microsoft.com/net/download)
 
-**Visual Studio Code:**
+**Using Visual Studio Code:**
 
-You don't need Visual Studio Code to edit the code, you can use any text editor. Visual Studio Code is a nice IDE and debugging in it is easy though, so it is easy to recommend. https://code.visualstudio.com 
+You don't need Visual Studio Code to edit the code, you can use any text editor. Visual Studio Code is a nice IDE and debugging in it is easy though, so it is easy to recommend. [https://code.visualstudio.com](https://code.visualstudio.com)
 
 After installing Visual Studio Code you will need to add the C# language extension: 
 
 Open Visual Studio Code and click the "Tools and languages" box on the welcome screen. Select C# from the available extensions (id: ms-vscode.csharp). 
 
-Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
+Prerequisites and set up guides are listed and linked to here: [https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code)
 
 **If you already have the .NET Core SDK and Visual Studio Code with C# set up:**
 
@@ -126,6 +126,6 @@ Clone this repository and then open the .csproj project file using Visual Studio
 
 * * * 
 
-Questions or Issues? https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/issues
+Questions or Issues? [https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/issues](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC/issues)
 
-I'm on Twitter: https://twitter.com/wintercooled
+I'm on Twitter: [https://twitter.com/wintercooled](https://twitter.com/wintercooled)
