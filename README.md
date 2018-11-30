@@ -100,7 +100,7 @@ You don't need Visual Studio Code to edit the code, you can use any text editor.
 
 After installing Visual Studio Code you will need to add the C# language extension: 
 
-Open Visual Studio Code and click the "Tools and languages" tab on the welcome screen. Select C# from the available extensions. 
+Open Visual Studio Code and click the "Tools and languages" box on the welcome screen. Select C# from the available extensions (id: ms-vscode.csharp). 
 
 Prerequisites and set up guides are listed and linked to here: https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code
 
