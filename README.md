@@ -1,17 +1,17 @@
 # dotnetcoreDynamicJSON-RPC
-## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements and other RPC enabled daemons.
+## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to Bitcoin, Elements, Liquid and other RPC enabled daemons.
 
-## Designed to be an easy-to-use tool that will run on Linux, Windows and Mac OS, letting you quickly write and automate the set up of blockchain states, test RPC commands or whatever else you may find it useful for.
+## Runs on Linux, Windows and Mac OS, letting you quickly write node-connected applications, automate the set up of blockchain states, test RPC commands, or whatever else you may find it useful for.
 
-## An example of how to use the dotnetcoreDynamicJSON-RPC class in a .NET Core MVC app can be found [here](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC_MVCExample).
+## An example of how to use the dotnetcoreDynamicJSON-RPC class within a .NET Core MVC app can be found [here](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC_MVCExample).
 
 ### Status
 
-Runs on Windows, Linux, Mac using the .NET Core cross-platform application framework.
+Runs on Linux, Windows, Mac using the .NET Core cross-platform application framework.
 
-Working example using [Bitcoin](https://github.com/bitcoin/bitcoin) (bitcoind) and [Elements](https://elementsproject.org/) (elementsd) as the target daemons.
+Program.cs contains a working example using [Bitcoin](https://github.com/bitcoin/bitcoin) (bitcoind) and [Elements](https://elementsproject.org/) (elementsd) as the target daemons.
 
-Future work includes testing against a [Liquid](https://blockstream.com/liquid/) node and trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
+Future work includes trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
 
 **dotnetcoreDynamicJSON-RPC.cs** - the actual code you can copy into your own project to wrap RPC calls.
 
