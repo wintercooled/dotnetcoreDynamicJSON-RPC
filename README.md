@@ -92,7 +92,21 @@ That's it!
 
 The code targets version 2.1 of the .NET Core framework.
 
-The .NET Core SDK is here: [https://www.microsoft.com/net/download](https://www.microsoft.com/net/download)
+Register the Microsoft key and feed by choosing the Linux distribution you are using from the [dotnet download site](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/sdk-current). It will give you the code to run and will look similar to this:
+
+```
+wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+```
+
+Install the .NET SDK:
+
+```
+sudo add-apt-repository universe
+sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install dotnet-sdk-2.1
+```
 
 **Using Visual Studio Code:**
 
