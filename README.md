@@ -45,7 +45,7 @@ The **RPCResultExtensions class** within dotnetcoreDynamicJSON-RPC.cs just conta
 
 The dotnetcoreDynamicJSON_RPC class inherits from the System.Dynamic.DynamicObject class and also uses System.Reflection to allow methods to be evaluated at runtime. This means you can add new methods to your code as they are added to Bitcoin, Elements, Liquid, some-other-rpc-daemon without having to update any references your project has. The new method calls will be evaluated at runtime and sent off to the daemon as RPC calls. If the method is avaiable in the daemon, it will get executed.
 
-There is of course a caveat with runtime binding: if you call a method name incorrectly you wont find out until it runs, so type and test carefully! ;-)
+There is of course a caveat with runtime binding: if you call a method name incorrectly or pass the wrong type of parameter in, you wont find out until it runs, so type and test carefully! ;-)
 
 ### Example
 
