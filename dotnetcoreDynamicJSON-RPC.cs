@@ -166,5 +166,18 @@ namespace DotnetcoreDynamicJSONRPC
             IList<object> items = jObject.SelectToken("$." + path).Select(s => (object)s).ToList();
             return items;
         }
+        
+        /// <summary>
+        /// Returns a Dictionary of key/value pairs from the JSON data located at the 'path' specified.  
+        /// </summary>
+        /// <param name="path">The path to the key/value pairs you want returned from the JSON string this extension method is used on. Example: from getwalletinfo result select "result"</param>
+        /// <returns>A string,object key/value Dictionary</returns>
+        public static Dictionary<string, object> GetKeyValuePairs(this String str, string path)
+        {
+            var jObject = JObject.Parse(str);
+            var jTokens = jObject.SelectToken("$." + path);
+            var kvPairs = jTokens.ToObject<Dictionary<string, object>>();
+            return kvPairs;
+        }
     }
 }
