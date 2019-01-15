@@ -32,9 +32,9 @@ namespace DotnetcoreDynamicJSONRPC
             // It's up to you how you load these, we'll just hard code them here for now.
             
             string rpcUrl = "http://127.0.0.1";
-            string rpcPort = "8332";
-            string rpcUsername = "yourrpcuser";
-            string rpcPassword = "yourrpcpassword";
+            string rpcPort = "18884";
+            string rpcUsername = "user1";
+            string rpcPassword = "password1";
             
             // Initialise an instance of the dynamic dotnetcoreDynamicJSON_RPC class.
             dynamic dynamicRPC = new DynamicRPC(rpcUrl, rpcPort, rpcUsername, rpcPassword);
@@ -110,6 +110,7 @@ namespace DotnetcoreDynamicJSONRPC
                     {
                         Console.WriteLine(tx);
                     }
+                    
                     // That's what the string extension methods are doing, executing Linq and returning the results as 
                     // the required type (string, IList<string>, IList<object>) for convenience. Anyway, you can use Linq in your
                     // code should you want to. If not, you do not need to include the Newtonsoft.Json.Linq and System.Linq using statements
@@ -131,7 +132,7 @@ namespace DotnetcoreDynamicJSONRPC
                         // Decode the raw tx data so we can read it
                         string decodedTransaction = dynamicRPC.decoderawtransaction(transactionHex);
                         
-                        // Now we'll use the other List based extension method GetObjectList to get the array of vouts from the JSON
+                        // Now we'll use aother List based extension method GetObjectList to get the array of vouts from the JSON
                         // This is used to return complex objects within JSON data and uses the same access notation as GetProperty and GetStringList
                         var vouts = decodedTransaction.GetObjectList("result.vout"); 
 
@@ -152,6 +153,19 @@ namespace DotnetcoreDynamicJSONRPC
                     // That's it! You've used dynamic method calls to send requests to the daemon and the 3 string extension methods to 
                     // read and handle the returned JSON formatted data. 
                     Console.WriteLine("Total sum of vouts in block " + blockNumber + ": " + Convert.ToString(voutTotal));
+
+                    // There is another string extension method that we have not used yet - GetKeyValuePairs
+                    // GetKeyValuePairs is used to return the name and value of JSON properties as a Dictionary.
+                    // An example from Elements where this is of use is the return data from getwalletinfo which
+                    // returns asset name and amount key/value pairs as the 'balance'. As an example:
+                    string walletInfo = dynamicRPC.getwalletinfo();
+                    var balances = walletInfo.GetKeyValuePairs("result.balance");
+
+                    foreach (var b in balances)
+                    {
+                        string asset = b.Key;
+                        decimal amount = Convert.ToDecimal(b.Value);
+                    }
 
                     // Use the following to force an error at runtime for testing etc:
                     // As the method calls to dotnetcoreDynamicJSON_RPC are only evaluated at runtime they will not
