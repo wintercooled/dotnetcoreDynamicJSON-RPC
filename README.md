@@ -5,19 +5,21 @@
 
 ## An example of how to use the dotnetcoreDynamicJSON-RPC class within a .NET Core MVC app can be found [here](https://github.com/wintercooled/dotnetcoreDynamicJSON-RPC_MVCExample).
 
-### Status
+### Overview
 
-Program.cs contains a working example using Bitcoin (bitcoind) and Elements (elementsd) as the target daemons.
+Uses dynamic types to send RPC commands, meaning the code is brief and you can call whatever is listed here: https://bitcoin.org/en/developer-reference#bitcoin-core-apis, the extra RPC calls used by Elements/Liquid, and any future RPC commands, with little effort and no need to change the code within dotnetcoreDynamicJSON-RPC in the future.
 
-Future work includes trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
+Program.cs contains a working example using Bitcoin (bitcoind) and Elements/Liquid (elementsd) as the target daemons.
 
 **dotnetcoreDynamicJSON-RPC.cs** - the actual code you can copy into your own project to wrap RPC calls.
 
 **Program.cs** - an example program using the code with comments explaning how it works.
 
+Future work includes trying to find an easy way to access [c-lightning](https://github.com/ElementsProject/lightning) daemon using RPC.
+
 * * * 
 
-### Overview
+### Why?
 
 There are a few great C# based RPC wrappers for the Bitcoin daemon (bitcoind) available. As far as I have found they are all strongly typed/are .NET based and only work on Windows. Being strongly typed means they can't easily be pointed at other daemons, such as Elements, without being reworked. That's not ideal if you want a lightweight piece of code that can connect to different types of node.
 
