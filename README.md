@@ -1,4 +1,5 @@
-# dotnetcoreDynamicJSON-RPC
+# Good luck getting this working after any .NET updates - I've adandoned .NET/MVC for Python/Flask now.
+
 ## A .NET Core class intended to enable simple, dynamic wrapping of JSON RPC calls to [Bitcoin](https://github.com/bitcoin/bitcoin), [Elements](https://elementsproject.org/), [Liquid](https://blockstream.com/liquid/) and other RPC enabled daemons.
 
 ## Runs on Linux, Windows and Mac OS, letting you quickly write node-connected applications, automate the set up of blockchain states, test RPC commands, or whatever else you may find it useful for.
